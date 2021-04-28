@@ -1,0 +1,91 @@
+<html>
+    <head>
+    </head>
+    <body>
+
+    <h1> XMLHttpRequest Calls </h1>
+    
+   <!-- <button type = "button" onclick="put()" > Put:update </button>  -->
+
+    <button type = "button" onclick="getAll()" > Get:getAll </button>
+    <button type = "button" onclick="getOne()" > Get:getOne </button>
+    <button type = "button" onclick="post()" > Post:post </button>
+    <button type = "button" onclick="del()" > Del:delete </button>
+
+    <div id = "quote">
+        no response yet!
+    </div>
+    <script>
+        let xhttp = new XMLHttpRequest();
+        let params = "?quote=Hello";
+        let resource = "";
+        let paramsJason = JSON.stringify({quote:"Hello"});
+
+        function post() {
+            xhttp.open("POST","https://iamharryrai.com/API/v1/quote", true );
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlcoded");
+            xhttp.send(params);
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("quote").innerHTML =
+                    this.responseText;
+                }
+            };
+    
+        }
+        function put() {
+
+            let id = "";
+            xhttp.open("PUT", "https://iamharryrai.com/API/v1/quotes/" + id, true );
+            xhttp.setRequestHeader("Content-type", 'application/json: charset = utf-8');
+            xhttp.send(paramsJason);
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("quote").innerHTML =
+                this.responseText;
+                }
+            };
+        }
+
+        function getAll () {
+            xhttp.open("GET","https://iamharryrai.com/API/v1/quotes/", true);
+            xhttp.send();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("quote").innerHTML =
+                    this.response
+                }
+            };
+        }
+
+        function getOne () {
+            let id = "";
+            xhttp.open("GET", "https://iamharryrai.com/API/v1/quote/" + id, true);
+            xhttp.send();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("quote").innerHTML =
+                    this.response
+                }
+            };
+        }
+
+        function del() {
+            let id = "";
+            xhttp.open("DELETE", "https://iamharryrai.com/API/v1/quotes/" + id, true);
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhttp.send();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("quote").innerHTML =
+                    this.response
+                }
+            };
+        }
+
+</script>
+
+</body>
+
+</html>
+
